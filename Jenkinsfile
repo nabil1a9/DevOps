@@ -38,7 +38,25 @@ pipeline {
                                }
 
 
+       stage('Building Docker image') {
+               	   steps {
+               		 script {
+               			// Generating image from Dockerfile
+               			  sh 'docker build -t omayma01/devopsproject-0.0.1.jar .'
+               			}
+               		 }
+               	    }
+      stage('Push Docker Image') {
+            steps {
 
+
+                // Log in to Docker Hub with your credentials
+                withCredentials([usernamePassword(credentialsId: 'Docker-hub', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                }
+
+                // Push the Docker image to Docker Hub
+                sh "docker push omayma01/devopsproject-0.0.1.jar
     }
 }
 
