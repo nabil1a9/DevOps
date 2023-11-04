@@ -56,7 +56,7 @@ pipeline {
                 }
 
                 // Push the Docker image to Docker Hub
-                sh "docker push omayma01/devopsproject-0.0.1.jar
+                sh "docker push  omayma01/devopsproject-0.0.1.jar"
     }
 }
 
