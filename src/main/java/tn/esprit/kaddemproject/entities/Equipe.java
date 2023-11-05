@@ -14,6 +14,10 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Equipe implements Serializable{
+    public Equipe(Integer idEquipe)
+    {
+        this.idEquipe= idEquipe;
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

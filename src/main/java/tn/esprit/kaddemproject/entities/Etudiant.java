@@ -18,7 +18,6 @@ import javax.persistence.*;
 public class Etudiant implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     private Integer idEtudiant;
     private String nomE;
     private String prenomE;

@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface IEtudiantService extends IGenericService<Etudiant,Integer>  {
 
+
     void assignEtudiantToDepartement (Integer etudiantId, Integer departementId);
 
     Etudiant addAndAssignEtudiantToEquipeAndContract(Etudiant e, Integer idContrat, Integer idEquipe);

@@ -15,7 +15,7 @@ import javax.persistence.*;
 public class Departement implements Serializable{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
+    //@Setter(AccessLevel.NONE)
     private Integer idDepart;
     private String nomDepart;
 

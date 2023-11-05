@@ -13,6 +13,10 @@ import javax.persistence.*;
 @AllArgsConstructor @NoArgsConstructor
 //@Table(name = "contracts")
 public class Contrat implements Serializable{
+    public Contrat(Integer idContrat)
+    {
+        this.idContrat = idContrat;
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
