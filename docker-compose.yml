@@ -1,0 +1,24 @@
+version: '3'
+services:
+  mysqldb:
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=kaddemdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - db:/var/lib/mysql
+  backend:
+    depends_on:
+      - mysqldb
+    build: ./
+    restart: on-failure
+    ports:
+      - "8090:8089"
+    stdin_open: true
+    tty: true
+    volumes:
+      - .m2:/root/.m2
+volumes:
+  db:
