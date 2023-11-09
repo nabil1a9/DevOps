@@ -10,6 +10,8 @@ services:
     volumes:
       - db:/var/lib/mysql
   backend:
+    image: mahdihemriti/img:1.0.0
+    container_name: SpringBack
     depends_on:
       - mysqldb
     build: ./
