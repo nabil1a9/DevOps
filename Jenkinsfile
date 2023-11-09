@@ -29,7 +29,7 @@ pipeline {
             // Set up Maven
             def mvnHome = tool 'M2_HOME'
             // Run tests with Maven, this will also generate the JaCoCo reports
-            sh "${mvnHome}/mvn clean test"
+            sh "${mvnHome} clean test"
         }
     }
     post {
