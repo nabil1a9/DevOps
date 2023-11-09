@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: tn.esprit.kaddemproject.DepartementServiceImplTest
+-------------------------------------------------------------------------------
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 5.335 s - in tn.esprit.kaddemproject.DepartementServiceImplTest
