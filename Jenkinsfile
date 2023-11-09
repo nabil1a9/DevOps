@@ -35,7 +35,7 @@ pipeline {
     post {
         always {
             // Publish JUnit test results
-            junit '**/target/surefire-reports/TEST-.xml'
+            junit '**/target/surefire-reports/TEST-*.xml'
 
             // Publish JaCoCo test coverage report
             jacoco(
