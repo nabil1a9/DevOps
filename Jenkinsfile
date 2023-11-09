@@ -20,4 +20,12 @@ pipeline {
                 sh "mvn clean package -DskipTests"
             }
         }
+
+        stage('Docker Build') {
+      steps {
+          script {
+      	sh 'docker build -t enisgharbia/springboot_devops:latest .'
+      }
+      }
+    }
     }}
