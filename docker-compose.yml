@@ -1,19 +1,29 @@
-version: "3.7"
+version: '3'
 services:
-  kaddem-api:
-    image: kaddem-image
-    restart: always
+  mysqldb:
+    image: mysql:8.0.32
+    container_name: mysqldb
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_DATABASE: devops
+    
     ports:
-      - 9091:9090
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  springboot-app:
+    image: dalidas/springboot_devops   # Assurez-vous d'utiliser la bonne version de l'image
+    container_name: springboot-app
     depends_on:
       - mysqldb
 
-  mysqldb:
-    image: "mysql:8.0"
-    restart: always
     ports:
-      - 3306:3306
-
+      - "8082:8082"
     environment:
-      MYSQL_DATABASE: kaddemProject
-      MYSQL_ALLOW_EMPTY_PASSWORD: yes
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/devopsjdbc:mysql?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: ""
+
+volumes:
+  mysql_data:
