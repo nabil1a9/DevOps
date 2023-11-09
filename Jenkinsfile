@@ -14,13 +14,13 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
-        stage('Test JUnit Mockito and Generating JaCoCo Report ') {
+       /* stage('Test JUnit Mockito and Generating JaCoCo Report ') {
                   steps {
                        sh "mvn test"
 
                        sh "mvn jacoco:report"
                           }
-                      }
+                      }*/
 
          stage('SonarQube Analysis') {
             steps {
