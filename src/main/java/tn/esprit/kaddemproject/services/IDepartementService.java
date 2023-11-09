@@ -9,4 +9,5 @@ import tn.esprit.kaddemproject.generic.IGenericService;
 public interface IDepartementService extends IGenericService<Departement,Integer> {
 
 
+
 }

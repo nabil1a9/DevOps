@@ -22,4 +22,5 @@ public class Departement implements Serializable{
     @OneToMany(mappedBy="departement")
     private List<Etudiant> etudiants;
 
+
 }

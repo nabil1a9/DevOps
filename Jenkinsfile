@@ -14,12 +14,13 @@ pipeline {
                 sh 'mvn clean package'
             }
         }
-        stage('Test ') {
-            steps {
-                sh 'mvn test'
-            }
-          
-        }
+        stage('Test JUnit Mockito and Generating JaCoCo Report ') {
+                  steps {
+                       sh "mvn test"
+
+                       sh "mvn jacoco:report"
+                          }
+                      }
 
          stage('SonarQube Analysis') {
             steps {
@@ -78,7 +79,7 @@ pipeline {
                 emailext to: "hadricheomayma@gmail.com",
                 subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
                 body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
-                
+
             }
         }
 }
