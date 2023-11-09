@@ -1,0 +1,11 @@
+
+m
+java:S1301>"KReplace this "switch" statement by "if" statements to increase readability.(È«è…ýÿÿÿÿ8þÌ„“»1
+m
+java:S1301M"KReplace this "switch" statement by "if" statements to increase readability.(È«è…ýÿÿÿÿ8Í„“»1
+E
+java:S5411="(Use a primitive boolean expression here.(ê„‚8„Í„“»1
+_
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8·Î„“»1
+z	java:S131>"YComplete cases by adding the missing enum constants or add a default case to this switch.(È«è…ýÿÿÿÿ8ÍÎ„“»1
+z	java:S131M"YComplete cases by adding the missing enum constants or add a default case to this switch.(È«è…ýÿÿÿÿ8ÒÎ„“»1

@@ -1,0 +1,8 @@
+
+^	java:S119"IRename this generic name to match the regular expression '^[A-Z][0-9]?$'.(¥¹ö®
+u
+java:S1128"SRemove this unused import 'org.springframework.beans.factory.annotation.Autowired'.(¡ž¸Îùÿÿÿÿ8˜•ð’»1
+o
+java:S1128"RRemove this unused import 'org.springframework.data.jpa.repository.JpaRepository'.(À™‡“8™•ð’»1
+b
+java:S1128"ERemove this unused import 'tn.esprit.kaddemproject.entities.Contrat'.(¬æûÛ8š•ð’»1

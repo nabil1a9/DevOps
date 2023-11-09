@@ -1,0 +1,7 @@
+
+X
+java:S1854,"BRemove this useless assignment to local variable "activeContract".(¨Ì“
+U
+java:S6213?":Rename this variable to not match a restricted identifier.(îÓÎ’şÿÿÿÿ
+k
+java:S6809I"UCall transactional methods via an injected dependency instead of directly via 'this'.(ÈÿòÂ
