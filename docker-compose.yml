@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    image: 'walid/kaddem-app:0.0.1'  # Ensure that the Docker image is built beforehand
+    image: 'walid0999/kaddem-app:0.0.1'  # Ensure that the Docker image is built beforehand
     ports:
       - '8089:8089'  # Match the port configured in the Spring Boot application
     environment:
@@ -18,7 +18,10 @@ services:
     ports:
       - '3306:3306'  # Expose port 3306 to access MySQL
     environment:
-      - MYSQL_DATABASE=kaddemdb  # Database name
+      - MYSQL_DATABASE=Waliddb  # Database name
       - MYSQL_ROOT_PASSWORD=root # Set a secure password for the root user
     volumes:
       - 'db_data:/var/lib/mysql'  # Persist MySQL data
+volumes:
+  db_data:
+  app_data:
