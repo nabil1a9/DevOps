@@ -14,13 +14,7 @@ pipeline {
                 sh 'mvn clean compile'
             }
         }
-       /* stage('Test JUnit Mockito and Generating JaCoCo Report ') {
-                  steps {
-                       sh "mvn test"
 
-                       sh "mvn jacoco:report"
-                          }
-                      }*/
 
          stage('SonarQube Analysis') {
             steps {
@@ -65,6 +59,13 @@ pipeline {
                                         sh 'docker-compose -f docker-compose.yml up -d --build'
                                     }
                                 }
+       stage('Test JUnit Mockito and Generating JaCoCo Report ') {
+                        steps {
+                             sh "mvn test"
+
+                             sh "mvn jacoco:report"
+                                }
+                            }
       stage('Prometheus And Grafana'){
             steps {
 
