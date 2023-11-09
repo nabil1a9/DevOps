@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                sh 'mvn clean package'
+                sh 'mvn clean compile'
             }
         }
         stage('Test JUnit Mockito and Generating JaCoCo Report ') {
