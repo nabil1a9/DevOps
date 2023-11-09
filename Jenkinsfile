@@ -15,4 +15,9 @@ pipeline {
                     credentialsId: "github-cred";
             }
         }
+        stage('Build') {
+            steps {
+                sh 'mvn clean package'
+            }
+        }
     }}
