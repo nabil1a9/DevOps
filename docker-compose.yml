@@ -4,7 +4,7 @@ services:
     image: mysql:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=kaddemdb
+      - MYSQL_DATABASE=devopsdb
     ports:
       - "3307:3306"
     volumes:

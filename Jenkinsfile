@@ -64,7 +64,22 @@ pipeline {
                                         sh 'docker-compose -f docker-compose.yml up -d --build'
                                     }
                                 }
+      stage('Prometheus And Grafana'){
+            steps {
+
+                   sh "docker start prometheus"
+                   sh "docker start grafana"
+                                                		}
+                                                	}
 
     }
+    post{
+            always{
+                emailext to: "hadricheomayma@gmail.com",
+                subject: "jenkins build:${currentBuild.currentResult}: ${env.JOB_NAME}",
+                body: "${currentBuild.currentResult}: Job ${env.JOB_NAME}\nMore Info can be found here: ${env.BUILD_URL}",
+                
+            }
+        }
 }
 
