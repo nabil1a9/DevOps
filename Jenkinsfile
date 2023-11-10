@@ -48,9 +48,7 @@ pipeline {
             }
         }
 
-        stage('Docker Push') {
-    
-}
+        
 	stage('Deploy application with monitoring') {
                         steps {
                           sh 'docker-compose up -d'  
