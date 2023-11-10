@@ -45,37 +45,12 @@ pipeline {
                 sh "mvn sonar:sonar -Dsonar.projectKey=kaddemapi  -Dsonar.host.url=http://192.168.56.11:9000 -Dsonar.login=2ecfaee20a3708fc2a43d6067f0ee7c659a5a33d"
             }
         }
-	stage("Publish to Nexus Repository Manager") {
+	stage("Deploy artifact to Nexus") {
             steps {
-                script {
-                    def nexusRepository = "Devops_Project"
-                    pom = readMavenPom file: "pom.xml"
-                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
-                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
-                    artifactPath = filesByGlob[0].path
-                    artifactExists = fileExists artifactPath
-
-                    if (artifactExists) {
-                        echo "* File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
-                        nexusArtifactUploader(
-                            nexusVersion: NEXUS_VERSION,
-                            protocol: NEXUS_PROTOCOL,
-                            nexusUrl: NEXUS_URL,
-                            groupId: pom.groupId,
-                            version: pom.version,
-                            repository: nexusRepository,
-                            credentialsId: 'nexus-cred',
-                            artifacts: [
-                                [artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging],
-                                [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
-                            ]
-                        )
-                    } else {
-                        error "* File: ${artifactPath}, could not be found"
-                    }
-                }
+                sh "mvn deploy -e -DskipTests"
             }
         }
+
         stage('Docker Build') {
             steps {
                 script {
@@ -83,6 +58,14 @@ pipeline {
                 }
             }
         }
+	    stage('Docker Push') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+            sh "echo ${env.dockerHubPassword} | docker login -u ${env.dockerHubUser} --password-stdin"
+            sh "docker push ${DOCKER_IMAGE_NAME}"
+        }
+    }
+    }
 
         
 	stage('Deploy application with monitoring') {
