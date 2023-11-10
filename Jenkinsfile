@@ -46,6 +46,38 @@ pipeline {
                 sh "mvn sonar:sonar  -Dsonar.projectKey=kaddem   -Dsonar.host.url=http://192.168.33.10:9000   -Dsonar.login=squ_30274d182b05e6cad5e3b4e53b11635c53d369e6"
             }
         }
+
+	stage("Publish to Nexus Repository Manager") {
+            steps {
+                script {
+                    def nexusRepository = "Devops_Project"
+                    pom = readMavenPom file: "pom.xml"
+                    filesByGlob = findFiles(glob: "target/*.${pom.packaging}")
+                    echo "${filesByGlob[0].name} ${filesByGlob[0].path} ${filesByGlob[0].directory} ${filesByGlob[0].length} ${filesByGlob[0].lastModified}"
+                    artifactPath = filesByGlob[0].path
+                    artifactExists = fileExists artifactPath
+
+                    if (artifactExists) {
+                        echo "* File: ${artifactPath}, group: ${pom.groupId}, packaging: ${pom.packaging}, version ${pom.version}"
+                        nexusArtifactUploader(
+                            nexusVersion: NEXUS_VERSION,
+                            protocol: NEXUS_PROTOCOL,
+                            nexusUrl: NEXUS_URL,
+                            groupId: pom.groupId,
+                            version: pom.version,
+                            repository: nexusRepository,
+                            credentialsId: 'nexus-cred',
+                            artifacts: [
+                                [artifactId: pom.artifactId, classifier: '', file: artifactPath, type: pom.packaging],
+                                [artifactId: pom.artifactId, classifier: '', file: "pom.xml", type: "pom"]
+                            ]
+                        )
+                    } else {
+                        error "* File: ${artifactPath}, could not be found"
+                    }
+                }
+            }
+        }
 	    
         stage('Docker Push') {
     steps {
