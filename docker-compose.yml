@@ -3,7 +3,7 @@ services:
   mysqldb:
     image: mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=omayma23344877
+      - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=devopsdb
     ports:
       - "3307:3306"

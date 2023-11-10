@@ -1,24 +1,21 @@
 package tn.esprit.kaddemproject;
 
-import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-
 import tn.esprit.kaddemproject.entities.Departement;
 import tn.esprit.kaddemproject.repositories.DepartementRepository;
 import tn.esprit.kaddemproject.services.IDepartementServiceImpl;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DepartementServiceImplTest {
@@ -29,23 +26,17 @@ public class DepartementServiceImplTest {
     @InjectMocks
     private IDepartementServiceImpl departementService;
 
-    @BeforeEach
-    public void init() {
-        MockitoAnnotations.openMocks(this);
-    }
-
     @Test
     public void testRetrieveAllDepartements() {
-        Departement departement1 = new Departement(1, "IT", null);
-        Departement departement2 = new Departement(2, "HR", null);
-        List<Departement> departements = Arrays.asList(departement1, departement2);
+        List<Departement> departements = new ArrayList<>();
+        departements.add(new Departement(1, "IT", null));
+        departements.add(new Departement(2, "HR", null));
 
         when(departementRepository.findAll()).thenReturn(departements);
 
         List<Departement> result = departementService.retrieveAllDepartements();
 
-        assertEquals(2, result.size());
-        verify(departementRepository, times(1)).findAll();
+        assertEquals(departements, result);
     }
 
     @Test
@@ -87,13 +78,11 @@ public class DepartementServiceImplTest {
 
     @Test
     public void testDeleteDepartement() {
-        Departement departement = new Departement(1, "Sales", null);
+        Integer departementId = 1;
 
-        when(departementRepository.findById(1)).thenReturn(Optional.of(departement));
-        doNothing().when(departementRepository).delete(any(Departement.class));
+        doNothing().when(departementRepository).deleteById(departementId);
+        departementService.deleteDepartement(departementId);
 
-        departementService.deleteDepartement(1);
-
-        verify(departementRepository, times(1)).delete(departement);
+        verify(departementRepository, times(1)).deleteById(departementId);
     }
 }
