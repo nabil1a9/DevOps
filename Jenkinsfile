@@ -68,7 +68,7 @@ pipeline {
             script {
 
                 // Le point (.) indique que le contexte de build est le répertoire courant
-                sh ' echo "azertyuio" | sudo -S docker build -t walid0999/kaddem-app:0.0.1 .'
+                sh ' docker build -t walid0999/kaddem-app:0.0.1 .'
             }
         }
          }
