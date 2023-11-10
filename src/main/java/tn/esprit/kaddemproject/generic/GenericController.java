@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class GenericController<T,ID> {
 	@Autowired
 	IGenericService<T,ID> genericService;
-
 	@PostMapping()
 	public T add(@RequestBody T entity) {
 		return genericService.add(entity);
