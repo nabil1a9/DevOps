@@ -76,5 +76,5 @@ public class DepartementServiceImplTest {
         assertEquals("Engineering", result.getNomDepart());
     }
 
-  
+
 }
