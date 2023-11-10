@@ -48,4 +48,10 @@ pipeline {
             sh "docker push ${DOCKER_IMAGE_NAME}"
         }
     }
-    }}}
+    }
+    stage("Static Code Analysis: SonarQube") {
+            steps {
+                sh "mvn sonar:sonar  -Dsonar.projectKey=kaddem   -Dsonar.host.url=http://192.168.33.10:9000   -Dsonar.login=e72d4ee92e195fecea3c413fbd800e149def1550"
+            }
+        }
+    }}
