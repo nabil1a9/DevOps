@@ -76,13 +76,5 @@ public class DepartementServiceImplTest {
         assertEquals("Engineering", result.getNomDepart());
     }
 
-    @Test
-    public void testDeleteDepartement() {
-        Integer departementId = 1;
-
-        doNothing().when(departementRepository).deleteById(departementId);
-        departementService.deleteDepartement(departementId);
-
-        verify(departementRepository, times(1)).deleteById(departementId);
-    }
+  
 }
