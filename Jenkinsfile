@@ -89,6 +89,14 @@ pipeline {
             }
 
                 }
+                stage('Docker Compose BUILD/RUN') {
+            steps {
+                script {
+                    // Start your application and database with Docker Compose
+                    sh 'docker-compose -f docker-compose.yml up -d app db'
+                }
+            }
+        }
 
                 }
                 }
