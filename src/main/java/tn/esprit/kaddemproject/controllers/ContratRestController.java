@@ -23,12 +23,6 @@ import java.util.Date;
 public class ContratRestController extends GenericController<Contrat,Integer> {
     private final IContratService contratService;
 
-    @Autowired
-    public ContratRestController(IContratService contratService, IGenericService<Contrat, Integer> genericService) {
-        this.contratService = contratService;
-        this.setGenericService(genericService);
-    }
-
     @PostMapping("/{idContrat}/{nomE}/{prenomE}")
     public Contrat affectContratToEtudiant (@PathVariable Integer idContrat,
                                                 @PathVariable String nomE,
