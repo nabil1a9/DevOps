@@ -52,14 +52,12 @@ pipeline {
                 sh "mvn deploy -e -DskipTests"
             }
         }
-	    
-        stage('Docker Push') {
-    steps {
-        withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
-            sh "echo ${env.dockerHubPassword} | docker login -u ${env.dockerHubUser} --password-stdin"
-            sh "docker push ${DOCKER_IMAGE_NAME}"
-        }
-    }
-    }
+	stage('Deploy application with monitoring') {
+                        steps {
+                          sh 'docker-compose up -d'  
+                            
+                        }
+                    } 
+        
     
     }}
