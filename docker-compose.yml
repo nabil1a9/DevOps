@@ -3,10 +3,10 @@ services:
   mysqldb:
     image: mysql:latest
     environment:
-      MYSQL_DATABASE: mahdidb
-      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=mahdidb
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - db:/var/lib/mysql
   backend:
@@ -16,11 +16,6 @@ services:
       - mysqldb
     build: ./
     restart: on-failure
-    environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/mahdidb?createDatabaseIfNotExist=true&useUnicode=true
-      SPRING_DATASOURCE_USERNAME: root
-      SPRING_DATASOURCE_PASSWORD:
-      SPRING_PROFILES_ACTIVE: dev
     ports:
       - "8089:8089"
     stdin_open: true
