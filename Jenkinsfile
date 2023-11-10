@@ -43,7 +43,7 @@ pipeline {
     }
 	stage("Static Code Analysis: SonarQube") {
             steps {
-                sh "mvn sonar:sonar  -Dsonar.projectKey=kaddem   -Dsonar.host.url=http://192.168.33.10:9000   -Dsonar.login=e72d4ee92e195fecea3c413fbd800e149def1550"
+                sh "mvn sonar:sonar  -Dsonar.projectKey=kaddem   -Dsonar.host.url=http://192.168.33.10:9000   -Dsonar.login=squ_30274d182b05e6cad5e3b4e53b11635c53d369e6"
             }
         }
 	    
