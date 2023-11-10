@@ -26,7 +26,22 @@ pipeline {
                sh "mvn clean package -DskipTests"
             }
         }
-        
+        stage('Docker Build') {
+      steps {
+          script {
+      	sh 'docker build -t salimsghaier/springboot_devops:latest .'
+      }
+      }
+    }
+        stage('Docker Push') {
+    	
+      steps {
+      	withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        	sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+          sh 'docker push salimsghaier/springboot_devops:latest'
+        }
+      }
+        }
     }
  
 }
