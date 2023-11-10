@@ -40,6 +40,11 @@ pipeline {
                sh "mvn clean package -DskipTests"
             }
         }
+	stage("SRC Analysis Testing") {
+            steps {
+                sh "mvn sonar:sonar -Dsonar.projectKey=kaddemapi  -Dsonar.host.url=http://192.168.56.11:9000 -Dsonar.login=2ecfaee20a3708fc2a43d6067f0ee7c659a5a33d"
+            }
+        }
         stage('Docker Build') {
             steps {
                 script {
