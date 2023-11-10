@@ -17,7 +17,7 @@ pipeline {
 
 stage('Test JUnit Mockito and Generating JaCoCo Report') {
     steps {
-        sh "mvn test -Ptest" // Activate the 'test' profile
+        sh "mvn test" // Activate the 'test' profile
 
         // Run the JaCoCo report goal separately or it can be bound to a Maven phase
         sh "mvn jacoco:report"
