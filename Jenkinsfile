@@ -15,8 +15,8 @@ pipeline {
         SONAR_USERNAME = "admin"
         SONAR_PASSWORD = "123"
         NEXUS_REPOSITORY = "Devops_Project"
-        DOCKER_IMAGE_NAME = "dalidas/springboot_devops:latest"
-        DOCKER_FRONT_IMAGE_NAME = "dalidas/devops_angular:latest"
+        DOCKER_IMAGE_NAME = "salimsghaier/springboot_devops:latest"
+        DOCKER_FRONT_IMAGE_NAME = "salimsghaier/devops_angular:latest"
 	
     }
     
@@ -41,13 +41,14 @@ pipeline {
             }
         }
         stage('Docker Build') {
-      steps {
-          script {
-      	sh 'docker build -t salimsghaier/springboot_devops:latest .'
-      }
-      }
-    }
-        stage('Push image spring') {
+            steps {
+                script {
+                    sh 'docker build -t ${DOCKER_IMAGE_NAME} .'
+                }
+            }
+        }
+
+        stage('Docker Push') {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
                     sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
