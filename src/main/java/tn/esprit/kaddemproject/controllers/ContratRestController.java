@@ -1,12 +1,14 @@
 package tn.esprit.kaddemproject.controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.kaddemproject.entities.Contrat;
 import tn.esprit.kaddemproject.entities.Equipe;
 import tn.esprit.kaddemproject.entities.Specialite;
 import tn.esprit.kaddemproject.generic.GenericController;
+import tn.esprit.kaddemproject.generic.IGenericService;
 import tn.esprit.kaddemproject.repositories.ContratRepository;
 import tn.esprit.kaddemproject.services.IContratService;
 
@@ -21,6 +23,11 @@ import java.util.Date;
 public class ContratRestController extends GenericController<Contrat,Integer> {
     private final IContratService contratService;
 
+    @Autowired
+    public ContratRestController(IContratService contratService, IGenericService<Contrat, Integer> genericService) {
+        this.contratService = contratService;
+        this.setGenericService(genericService);
+    }
 
     @PostMapping("/{idContrat}/{nomE}/{prenomE}")
     public Contrat affectContratToEtudiant (@PathVariable Integer idContrat,
