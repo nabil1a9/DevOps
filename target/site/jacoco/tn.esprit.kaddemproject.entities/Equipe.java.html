@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Equipe.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">kaddemProject</a> &gt; <a href="index.source.html" class="el_package">tn.esprit.kaddemproject.entities</a> &gt; <span class="el_source">Equipe.java</span></div><h1>Equipe.java</h1><pre class="source lang-java linenums">package tn.esprit.kaddemproject.entities;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.*;
+
+@Entity
+public class Equipe implements Serializable{
+<span class="fc" id="L13">    public Equipe(Integer idEquipe, String nomEquipe, Niveau niveau) {</span>
+<span class="fc" id="L14">        this.idEquipe = idEquipe;</span>
+<span class="fc" id="L15">        this.nomEquipe = nomEquipe;</span>
+<span class="fc" id="L16">        this.niveau = niveau;</span>
+<span class="fc" id="L17">    }</span>
+
+<span class="fc" id="L19">    public Equipe() {</span>
+
+<span class="fc" id="L21">    }</span>
+
+    public Integer getIdEquipe() {
+<span class="fc" id="L24">        return idEquipe;</span>
+    }
+
+    public void setIdEquipe(Integer idEquipe) {
+<span class="nc" id="L28">        this.idEquipe = idEquipe;</span>
+<span class="nc" id="L29">    }</span>
+
+    public String getNomEquipe() {
+<span class="fc" id="L32">        return nomEquipe;</span>
+    }
+
+    public void setNomEquipe(String nomEquipe) {
+<span class="nc" id="L36">        this.nomEquipe = nomEquipe;</span>
+<span class="nc" id="L37">    }</span>
+
+    public Niveau getNiveau() {
+<span class="nc" id="L40">        return niveau;</span>
+    }
+
+    public void setNiveau(Niveau niveau) {
+<span class="nc" id="L44">        this.niveau = niveau;</span>
+<span class="nc" id="L45">    }</span>
+
+    public List&lt;Etudiant&gt; getEtudiants() {
+<span class="nc" id="L48">        return etudiants;</span>
+    }
+
+    public void setEtudiants(List&lt;Etudiant&gt; etudiants) {
+<span class="nc" id="L52">        this.etudiants = etudiants;</span>
+<span class="nc" id="L53">    }</span>
+
+    public DetailEquipe getDetailEquipe() {
+<span class="nc" id="L56">        return detailEquipe;</span>
+    }
+
+    public void setDetailEquipe(DetailEquipe detailEquipe) {
+<span class="nc" id="L60">        this.detailEquipe = detailEquipe;</span>
+<span class="nc" id="L61">    }</span>
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
+    private Integer idEquipe;
+    private String nomEquipe;
+    @Enumerated(EnumType.STRING)
+    private Niveau niveau;
+
+    @ManyToMany(mappedBy=&quot;equipes&quot;)
+    @JsonIgnore
+    private List&lt;Etudiant&gt; etudiants ;
+
+    @OneToOne
+    private DetailEquipe detailEquipe;
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

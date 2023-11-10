@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="fr"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>IEquipeServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">kaddemProject</a> &gt; <a href="index.source.html" class="el_package">tn.esprit.kaddemproject.services</a> &gt; <span class="el_source">IEquipeServiceImpl.java</span></div><h1>IEquipeServiceImpl.java</h1><pre class="source lang-java linenums">package tn.esprit.kaddemproject.services;
+
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
+import tn.esprit.kaddemproject.entities.Contrat;
+import tn.esprit.kaddemproject.entities.Equipe;
+import tn.esprit.kaddemproject.entities.Etudiant;
+import tn.esprit.kaddemproject.entities.Niveau;
+import tn.esprit.kaddemproject.generic.IGenericServiceImp;
+import tn.esprit.kaddemproject.repositories.EquipeRepository;
+
+import java.time.temporal.ChronoUnit;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+
+
+<span class="fc" id="L22">@Slf4j</span>
+<span class="fc" id="L23">@AllArgsConstructor</span>
+@Service
+public class IEquipeServiceImpl extends IGenericServiceImp&lt;Equipe,Integer&gt;implements IEquipeService {
+
+    @Autowired
+    private EquipeRepository equipeRepository;
+
+    public Equipe addEquipe(Equipe equipe) {
+<span class="fc" id="L31">        return equipeRepository.save(equipe);</span>
+    }
+
+    public Equipe updateEquipe(Equipe equipe) {
+<span class="nc" id="L35">        return equipeRepository.save(equipe);</span>
+    }
+
+    public Equipe retrieveEquipeById(Integer id) {
+<span class="nc" id="L39">        return equipeRepository.findById(id).orElse(null);</span>
+    }
+
+    public List&lt;Equipe&gt; retrieveAllEquipes() {
+<span class="fc" id="L43">        return equipeRepository.findAll();</span>
+    }
+
+    public Boolean deleteEquipe(Integer id) {
+<span class="nc" id="L47">        equipeRepository.deleteById(id);</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        return !equipeRepository.existsById(id);</span>
+    }
+
+
+    @Transactional
+  //  @Scheduled(cron = &quot;*/20 * * * * *&quot;)
+    @Override
+    public void faireEvoluerEquipes() {
+
+<span class="nc" id="L57">        List&lt;Equipe&gt;  equipes = this.retrieveAll();</span>
+
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (Equipe equipe: equipes) {</span>
+            //find out if this team needs to be upgraded
+<span class="nc bnc" id="L61" title="All 2 branches missed.">            if(needsToUpgrade(equipe)){</span>
+<span class="nc bnc" id="L62" title="All 3 branches missed.">                switch (equipe.getNiveau()){</span>
+                    case JUNIOR:
+<span class="nc" id="L64">                        equipe.setNiveau(Niveau.SENIOR);</span>
+<span class="nc" id="L65">                        break;</span>
+                    case SENIOR:
+<span class="nc" id="L67">                        equipe.setNiveau(Niveau.EXPERT);</span>
+                        break;
+                }
+            }
+<span class="nc" id="L71">        }</span>
+
+<span class="nc" id="L73">        this.retrieveAll().stream()</span>
+<span class="nc" id="L74">                .filter(this::needsToUpgrade)</span>
+<span class="nc bnc" id="L75" title="All 2 branches missed.">                .filter(equipe -&gt; !equipe.getNiveau().equals(Niveau.EXPERT))</span>
+<span class="nc" id="L76">                .forEach(equipe -&gt;{</span>
+<span class="nc bnc" id="L77" title="All 3 branches missed.">                            switch (equipe.getNiveau()){</span>
+<span class="nc" id="L78">                                case JUNIOR : equipe.setNiveau(Niveau.SENIOR); break;</span>
+<span class="nc" id="L79">                                case SENIOR : equipe.setNiveau(Niveau.EXPERT); break;</span>
+                            }
+<span class="nc" id="L81">                });</span>
+
+<span class="nc" id="L83">    }</span>
+
+
+
+    public Boolean needsToUpgrade(Equipe equipe){
+
+<span class="nc" id="L89">       int nbContrat =  equipe.getEtudiants().stream()</span>
+<span class="nc" id="L90">                .map(Etudiant::getContrats)</span>
+<span class="nc" id="L91">                .flatMap(Collection::stream)</span>
+<span class="nc" id="L92">                .filter(contrat -&gt;</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">                         contrat.getArchive().equals(false) &amp;&amp;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                         ChronoUnit.YEARS.between(contrat.getDateDebutContrat(),contrat.getDateFinContrat())&gt; 1  )</span>
+<span class="nc" id="L95">                .map(Contrat::getEtudiant)</span>
+<span class="nc" id="L96">                .distinct()</span>
+<span class="nc" id="L97">                .collect(Collectors.toList())</span>
+<span class="nc" id="L98">                .size();</span>
+
+<span class="nc bnc" id="L100" title="All 2 branches missed.">        return nbContrat&gt;2;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.5.201910111838</span></div></body></html>

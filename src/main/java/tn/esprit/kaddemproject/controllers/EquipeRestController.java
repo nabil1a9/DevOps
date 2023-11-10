@@ -20,35 +20,35 @@ public class EquipeRestController extends GenericController<Equipe,Integer> {
         @Autowired
         private IEquipeServiceImpl equipeService;
 
-        @PostMapping
-        public Equipe addEquipe(@RequestBody Equipe equipe) {
-            return equipeService.addEquipe(equipe);
-        }
-
-        @PutMapping
-        public Equipe updateEquipe(@RequestBody Equipe equipe) {
-            return equipeService.updateEquipe(equipe);
-        }
-
-        @GetMapping("/{id}")
-        public Equipe retrieveEquipeById(@PathVariable Integer id) {
-            return equipeService.retrieveEquipeById(id);
-        }
-
-        @GetMapping
-        public List<Equipe> retrieveAllEquipes() {
-            return equipeService.retrieveAllEquipes();
-        }
-
-        @DeleteMapping("/{id}")
-        public Boolean deleteEquipe(@PathVariable Integer id) {
-            return equipeService.deleteEquipe(id);
-        }
-
-        @PostMapping("/faireEvoluerEquipes")
-        public void faireEvoluerEquipes() {
-            equipeService.faireEvoluerEquipes();
-        }
+//        @PostMapping
+//        public Equipe addEquipe(@RequestBody Equipe equipe) {
+//            return equipeService.addEquipe(equipe);
+//        }
+//
+//        @PutMapping
+//        public Equipe updateEquipe(@RequestBody Equipe equipe) {
+//            return equipeService.updateEquipe(equipe);
+//        }
+//
+//        @GetMapping("/{id}")
+//        public Equipe retrieveEquipeById(@PathVariable Integer id) {
+//            return equipeService.retrieveEquipeById(id);
+//        }
+//
+//        @GetMapping
+//        public List<Equipe> retrieveAllEquipes() {
+//            return equipeService.retrieveAllEquipes();
+//        }
+//
+//        @DeleteMapping("/{id}")
+//        public Boolean deleteEquipe(@PathVariable Integer id) {
+//            return equipeService.deleteEquipe(id);
+//        }
+//
+//        @PostMapping("/faireEvoluerEquipes")
+//        public void faireEvoluerEquipes() {
+//            equipeService.faireEvoluerEquipes();
+//        }
     }
 
 
