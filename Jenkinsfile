@@ -41,6 +41,12 @@ pipeline {
       }
       }
     }
+	stage("Static Code Analysis: SonarQube") {
+            steps {
+                sh "mvn sonar:sonar  -Dsonar.projectKey=kaddem   -Dsonar.host.url=http://192.168.33.10:9000   -Dsonar.login=e72d4ee92e195fecea3c413fbd800e149def1550"
+            }
+        }
+	    
         stage('Docker Push') {
     steps {
         withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
@@ -49,9 +55,5 @@ pipeline {
         }
     }
     }
-    stage("Static Code Analysis: SonarQube") {
-            steps {
-                sh "mvn sonar:sonar  -Dsonar.projectKey=kaddem   -Dsonar.host.url=http://192.168.33.10:9000   -Dsonar.login=e72d4ee92e195fecea3c413fbd800e149def1550"
-            }
-        }
+    
     }}
