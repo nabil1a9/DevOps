@@ -5,8 +5,6 @@
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 v
 Fsrc/main/java/tn/esprit/kaddemproject/services/IEquipeServiceImpl.java,8\a\8af346998d765ecd5b6740c30194651a49afc6db
-
-Osrc/test/java/tn/esprit/kaddemproject/controllers/EquipeRestControllerTest.java,2\1\215d73115ca811f23f14d799a7d941835adfb4dc
 {
 Ksrc/main/java/tn/esprit/kaddemproject/controllers/EquipeRestController.java,5\4\543d67dec9d649cadfb4ec23826ea49213423862
 z
@@ -39,8 +37,6 @@ j
 :src/main/java/tn/esprit/kaddemproject/entities/Option.java,6\d\6d2eee1a953909f2506032093f48acf0689ad5d3
 |
 Lsrc/main/java/tn/esprit/kaddemproject/repositories/UniversiteRepository.java,6\f\6febe11d2f2d3722d2f3b7581ac53e305a64b3f6
-x
-Hsrc/test/java/tn/esprit/kaddemproject/KaddemProjectApplicationTests.java,9\9\99b2d2bac28a4f3e589a44eaaddf2591ad459f68
 }
 Msrc/main/java/tn/esprit/kaddemproject/repositories/DepartementRepository.java,2\d\2d18a620c2310a442faba1c6331618454a2a8c74
 z
