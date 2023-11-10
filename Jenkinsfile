@@ -92,8 +92,8 @@ pipeline {
                 stage('Docker Compose BUILD/RUN') {
             steps {
                 script {
-                    // Start your application and database with Docker Compose
-                    sh 'docker-compose -f docker-compose.yml up -d app db'
+                    def dockerComposePath = '/usr/libexec/docker/cli-plugins/docker-compose' // Replace with the actual path
+                    sh "${dockerComposePath} -f docker-compose.yml up -d app db"
                 }
             }
         }
