@@ -15,13 +15,15 @@ pipeline {
             }
         }
 
- stage('Test JUnit Mockito and Generating JaCoCo Report ') {
-                       steps {
-                            sh "mvn test"
+stage('Test JUnit Mockito and Generating JaCoCo Report') {
+    steps {
+        sh "mvn test -Ptest" // Activate the 'test' profile
 
-                             sh "mvn jacoco:report"
-                              }
-                           }
+        // Run the JaCoCo report goal separately or it can be bound to a Maven phase
+        sh "mvn jacoco:report"
+    }
+}
+
          stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('SonarQubeServer') {

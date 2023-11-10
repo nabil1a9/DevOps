@@ -6,6 +6,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.ActiveProfiles;
 import tn.esprit.kaddemproject.entities.Departement;
 import tn.esprit.kaddemproject.repositories.DepartementRepository;
 import tn.esprit.kaddemproject.services.IDepartementServiceImpl;
@@ -19,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-@DataJpaTest
+@ActiveProfiles("test")
 public class DepartementServiceImplTest {
 
     @Mock
