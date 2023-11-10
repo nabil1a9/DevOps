@@ -13,7 +13,7 @@ services:
       - mysql_data:/var/lib/mysql
 
   springboot-app:
-    image: salimsghaier/springboot_devops   # Assurez-vous d'utiliser la bonne version de l'image
+    image: dalidas/springboot_devops   # Assurez-vous d'utiliser la bonne version de l'image
     container_name: springboot-app
     depends_on:
       - mysqldb
@@ -24,7 +24,26 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysqldb:3306/devopsjdbc:mysql?createDatabaseIfNotExist=true
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: ""
-
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - ./prometheus.yaml:/etc/prometheus/prometheus.yml
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+    ports:
+      - "9090:9090"
+    depends_on:
+      - springboot-app
+        
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    depends_on:
+      - prometheus
   
 
 volumes:
