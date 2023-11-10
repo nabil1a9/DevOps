@@ -8,7 +8,7 @@
         <version>2.7.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <groupId>tn.esprit.spring</groupId>
+    <groupId>tn.esprit</groupId>
     <artifactId>kaddemProject</artifactId>
     <version>0.0.1</version>
     <name>kaddemProject</name>
