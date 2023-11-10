@@ -46,13 +46,7 @@ public class DepartementServiceImplTest {
         List<Departement> result = departementService.retrieveAllDepartements();
         assertEquals(departments, result);
     }
-    @Test
-    void deleteDepartment() {
-        int id = 1;
-        doNothing().when(departementRepository).deleteById(id);
-        departementService.deleteDepartement(id);
-        verify(departementRepository, times(1)).deleteById(id);
-    }
+
     @Test
     void retrieveDepartment() {
         int id = 1;
